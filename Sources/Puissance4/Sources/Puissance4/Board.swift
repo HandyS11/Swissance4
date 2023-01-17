@@ -42,7 +42,7 @@ public struct Board {
         return false
     }
     
-    private func putPiece(Column column: Int, Player p: Int) -> Bool {
+    public func putPiece(Column column: Int, Player p: Int) -> Bool {
         if (isColumnFull(Column: column)) {
             return false
         }
