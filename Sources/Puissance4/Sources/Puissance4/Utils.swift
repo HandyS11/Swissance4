@@ -8,7 +8,7 @@ public class Utils {
         for _ in 1 ... columns-3 {
             str += "  "
         }
-        str += "Swissance 4"
+        str += "Swissance 4\n"
         
         return str
     }
