@@ -6,14 +6,12 @@ public struct Board : CustomStringConvertible {
     public let nbColumns: Int
     public let nbRows: Int
     public let maxRound: Int
-    var board: [[Int?]]
+    public private(set) var board: [[Int?]]
     
     public var description: String {
         var str: String = String()
+        str.append(Decorator.addDecoration(Columns: nbColumns))
         
-        str = addDecoration(Text: str)
-        
-        // Each row
         for row in  board.reversed() {
             str.append("│ ")
             for cell in row {
@@ -21,7 +19,7 @@ public struct Board : CustomStringConvertible {
             }
             str.append("\n")
         }
-        str = addDecoration(Text: str)
+        str.append(Decorator.addDecoration(Columns: nbColumns))
         return str
     }
 
@@ -87,27 +85,17 @@ public struct Board : CustomStringConvertible {
     }
     
     public func toString(ShowColumn b: Bool = true) -> String {
-        var str: String = Displayer.gameName()
+        var str: String = Decorator.gameName()
         str.append(description)
         
-        // Columns
         if b {
             str.append("│")
             for k in 1 ... nbColumns {
                 str.append(String(format: " %d │", k))
             }
             str.append("\n")
-            str = addDecoration(Text: str)
+            str.append(Decorator.addDecoration(Columns: nbColumns))
         }
         return str
-    }
-    
-    private func addDecoration(Text str: String) -> String {
-        var s: String = str
-        for _ in 1 ... nbColumns {
-            s.append("\u{2015}\u{2015}\u{2015}\u{2015}")
-        }
-        s.append("\u{2015}\n")
-        return s
     }
 }

@@ -12,4 +12,6 @@ public class Player : CustomStringConvertible {
         self.id = id
         self.name = name
     }
+    
+    public func play(Board board: [[Int?]]) -> Int { return -1 }
 }
