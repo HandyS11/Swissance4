@@ -1,7 +1,12 @@
 import Foundation
 
 public struct Board : CustomStringConvertible {
-    private static let descriptionMapper : [Int? : String] = [nil: "  │ ", 1: "X │", 2: "O │"]
+    private static let descriptionMapper : [Int? : String] = [nil: "  │ ", 1: "X │ ", 2: "O │ "]
+    
+    public let nbColumns: Int
+    public let nbRows: Int
+    public let maxRound: Int
+    var board: [[Int?]]
     
     public var description: String {
         var str: String = String()
@@ -19,11 +24,6 @@ public struct Board : CustomStringConvertible {
         str = addDecoration(Text: str)
         return str
     }
-    
-    public let nbColumns: Int
-    public let nbRows: Int
-    public let maxRound: Int
-    var board: [[Int?]]
 
     public init?(Rows rows: Int = 6, Columns columns: Int = 7) {
         if rows < 4 || columns < 4 {
@@ -47,7 +47,7 @@ public struct Board : CustomStringConvertible {
     
     private func isFull() -> Bool {
         var cf = 1
-        for i in 1 ... nbColumns {
+        for i in 0 ..< nbColumns {
             if isColumnFull(Column: i) {
                 cf += 1
             }
@@ -59,7 +59,7 @@ public struct Board : CustomStringConvertible {
     }
     
     private func isColumnFull(Column column: Int) -> Bool {
-        return board[nbRows-1][column-1] != nil
+        return board[nbRows-1][column] != nil
     }
     
     private mutating func setPiece(Row row: Int, Column column: Int, Player p: Int) -> Bool {
@@ -87,7 +87,7 @@ public struct Board : CustomStringConvertible {
     }
     
     public func toString(ShowColumn b: Bool = true) -> String {
-        var str: String = Utils.gameName()
+        var str: String = Displayer.gameName()
         str.append(description)
         
         // Columns

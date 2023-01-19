@@ -1,15 +1,14 @@
 import Foundation
 
-public class Utils {
+public class Displayer {
     
     public static func gameName(Columns columns: Int = 7) -> String {
         var str: String = "\n"
         
         for _ in 1 ... columns-3 {
-            str += "  "
+            str.append("  ")
         }
-        str += "Swissance 4\n"
-        
+        str.append("Swissance 4\n")
         return str
     }
 }

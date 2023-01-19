@@ -23,6 +23,9 @@ final class BoardTests: XCTestCase {
         }
         expect(Rows: 4, Columns: 4, Nil: false)
         expect(Rows: 10, Columns: 10, Nil: false)
+        expect(Rows: 3, Columns: 3, Nil: true)
         expect(Rows: 0, Columns: 0, Nil: true)
+        expect(Rows: -5, Columns: 7, Nil: true)
+        expect(Rows: 7, Columns: -5, Nil: true)
     }
 }
