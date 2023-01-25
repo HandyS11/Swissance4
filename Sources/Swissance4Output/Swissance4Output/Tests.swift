@@ -1,4 +1,5 @@
 import Foundation
+import Puissance4
 
 /// Construct a Nounours
 ///
@@ -36,7 +37,7 @@ public class Nounours2 : Hashable {
     }
 }
 
-extension Date {
+/*extension Date {
     static let formatter = DateFormatter()
     
     init?(_ year: Int, _ month: Int, _ day: Int) {
@@ -50,7 +51,7 @@ extension Date {
         }
         return nil
     }
-}
+}*/
 
 let n1 = Nounours(name: "NounoursA", birthdate: Date(2022, 05, 26)!)
 let n2 = Nounours(name: "NouhoursB", birthdate: Date(2022, 07, 23)!)

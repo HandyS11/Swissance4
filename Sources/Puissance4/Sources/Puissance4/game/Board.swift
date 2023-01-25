@@ -1,10 +1,9 @@
 import Foundation
 
-public struct Board : CustomStringConvertible, LegacyRules {
+public struct Board : CustomStringConvertible {
     
     public let nbColumns: Int
     public let nbRows: Int
-    public let nbPiecesToAlign: Int
     public let maxRound: Int
     public private(set) var board: [[Int?]]
     private static let descriptionMapper : [Int? : String] = [nil: "  │ ", 1: "X │ ", 2: "O │ "]
@@ -24,25 +23,22 @@ public struct Board : CustomStringConvertible, LegacyRules {
         return str
     }
 
-    public init?(Rows rows: Int = 6, Columns columns: Int = 7, Pieces nbPieces: Int = 4) {
-        if rows < 4 || columns < 4 || nbPieces < max(rows, columns) || nbPieces > 0 {
+    public init?(Rows rows: Int = 6, Columns columns: Int = 7) {
+        if rows < 4 || columns < 4 {
             return nil
         }
         nbRows = rows
         nbColumns = columns
-        nbPiecesToAlign = nbPieces
         maxRound = rows * columns
         board = Array(repeating: Array(repeating: nil, count: columns), count: rows)
     }
     
-    public init?(Grid grid: [[Int?]], Pieces nbPieces: Int = 4) {
+    public init?(Grid grid: [[Int?]]) {
         guard grid.count >= 4 && grid[0].count >= 4 else { return nil}
         let result = grid.allSatisfy { $0.count == grid[0].count }
         guard result else { return nil }
-        guard nbPieces > max(grid.count, grid[0].count) else { return nil }
         nbRows = grid.count
         nbColumns = grid[0].count
-        nbPiecesToAlign = nbPieces
         maxRound = nbRows * nbColumns
         board = grid
     }

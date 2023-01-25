@@ -1,6 +1,6 @@
 import Foundation
 
-extension Date {
+public extension Date {
     
     static let formatter = DateFormatter()
     
