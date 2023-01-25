@@ -1,6 +1,7 @@
 import Foundation
 
 public class Player : CustomStringConvertible {
+    
     public var description: String {
         return String(format: "Player n°%d : %s", id, name)
     }
@@ -13,5 +14,7 @@ public class Player : CustomStringConvertible {
         self.name = name
     }
     
-    public func play(Board board: [[Int?]]) -> Int { return -1 }
+    public func play(Board board: [[Int?]]) -> Int? {
+        nil
+    }
 }

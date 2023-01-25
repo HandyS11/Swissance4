@@ -1,18 +1,19 @@
 import Foundation
 
-public struct Board : CustomStringConvertible {
-    private static let descriptionMapper : [Int? : String] = [nil: "  │ ", 1: "X │ ", 2: "O │ "]
+public struct Board : CustomStringConvertible, LegacyRules {
     
     public let nbColumns: Int
     public let nbRows: Int
+    public let nbPiecesToAlign: Int
     public let maxRound: Int
     public private(set) var board: [[Int?]]
+    private static let descriptionMapper : [Int? : String] = [nil: "  │ ", 1: "X │ ", 2: "O │ "]
     
     public var description: String {
         var str: String = String()
         str.append(Decorator.addDecoration(Columns: nbColumns))
         
-        for row in  board.reversed() {
+        for row in board.reversed() {
             str.append("│ ")
             for cell in row {
                 str.append("\(String(describing: Board.descriptionMapper[cell] ?? "  \u{007C} "))")
@@ -23,22 +24,25 @@ public struct Board : CustomStringConvertible {
         return str
     }
 
-    public init?(Rows rows: Int = 6, Columns columns: Int = 7) {
-        if rows < 4 || columns < 4 {
+    public init?(Rows rows: Int = 6, Columns columns: Int = 7, Pieces nbPieces: Int = 4) {
+        if rows < 4 || columns < 4 || nbPieces < max(rows, columns) || nbPieces > 0 {
             return nil
         }
         nbRows = rows
         nbColumns = columns
+        nbPiecesToAlign = nbPieces
         maxRound = rows * columns
         board = Array(repeating: Array(repeating: nil, count: columns), count: rows)
     }
     
-    public init?(Grid grid: [[Int?]]) {
-        guard grid.count > 0 && grid[0].count > 0 else { return nil}
+    public init?(Grid grid: [[Int?]], Pieces nbPieces: Int = 4) {
+        guard grid.count >= 4 && grid[0].count >= 4 else { return nil}
         let result = grid.allSatisfy { $0.count == grid[0].count }
         guard result else { return nil }
+        guard nbPieces > max(grid.count, grid[0].count) else { return nil }
         nbRows = grid.count
         nbColumns = grid[0].count
+        nbPiecesToAlign = nbPieces
         maxRound = nbRows * nbColumns
         board = grid
     }
@@ -82,6 +86,10 @@ public struct Board : CustomStringConvertible {
             }
         }
         return false
+    }
+    
+    mutating func isGameOver() {
+        
     }
     
     public func toString(ShowColumn b: Bool = true) -> String {

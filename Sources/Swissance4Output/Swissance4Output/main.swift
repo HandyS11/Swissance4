@@ -12,4 +12,6 @@ print(board!.toString())
 print("\n\n\n\n")
 
 let human: Human = Human(Id: 1, Name: "Valentin")
-print(human.play(Board: board!.board))
+//print(human.play(Board: board!.board))
+
+
