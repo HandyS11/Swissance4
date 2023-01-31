@@ -10,7 +10,6 @@ public struct Board : CustomStringConvertible {
     
     public var description: String {
         var str: String = String()
-        str.append(Decorator.addDecoration(Columns: nbColumns))
         
         for row in board.reversed() {
             str.append("│ ")
@@ -19,7 +18,6 @@ public struct Board : CustomStringConvertible {
             }
             str.append("\n")
         }
-        str.append(Decorator.addDecoration(Columns: nbColumns))
         return str
     }
 
@@ -43,7 +41,7 @@ public struct Board : CustomStringConvertible {
         board = grid
     }
     
-    private func isFull() -> Bool {
+    public func isBoardFull() -> Bool {
         var cf = 1
         for i in 0 ..< nbColumns {
             if isColumnFull(Column: i) {
@@ -56,7 +54,7 @@ public struct Board : CustomStringConvertible {
         return false
     }
     
-    private func isColumnFull(Column column: Int) -> Bool {
+    public func isColumnFull(Column column: Int) -> Bool {
         return board[nbRows-1][column] != nil
     }
     
@@ -82,24 +80,5 @@ public struct Board : CustomStringConvertible {
             }
         }
         return false
-    }
-    
-    mutating func isGameOver() {
-        
-    }
-    
-    public func toString(ShowColumn b: Bool = true) -> String {
-        var str: String = Decorator.gameName()
-        str.append(description)
-        
-        if b {
-            str.append("│")
-            for k in 1 ... nbColumns {
-                str.append(String(format: " %d │", k))
-            }
-            str.append("\n")
-            str.append(Decorator.addDecoration(Columns: nbColumns))
-        }
-        return str
     }
 }

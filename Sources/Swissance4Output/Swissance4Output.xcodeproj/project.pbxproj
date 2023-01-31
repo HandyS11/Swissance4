@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC1AA1CA298961B800565AE4 /* Displayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1AA1C9298961B800565AE4 /* Displayer.swift */; };
 		EC436CF3298132A10076CD4C /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC436CF2298132A10076CD4C /* Tests.swift */; };
 		EC7B1AF72976871C004177A5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7B1AF62976871C004177A5 /* main.swift */; };
 		EC7B1AFF29768763004177A5 /* Puissance4 in Frameworks */ = {isa = PBXBuildFile; productRef = EC7B1AFE29768763004177A5 /* Puissance4 */; };
@@ -25,6 +26,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EC1AA1C9298961B800565AE4 /* Displayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Displayer.swift; sourceTree = "<group>"; };
 		EC436CF2298132A10076CD4C /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		EC7B1AF32976871C004177A5 /* Swissance4Output */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Swissance4Output; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC7B1AF62976871C004177A5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 		EC7B1AF52976871C004177A5 /* Swissance4Output */ = {
 			isa = PBXGroup;
 			children = (
+				EC1AA1C9298961B800565AE4 /* Displayer.swift */,
 				EC7B1AF62976871C004177A5 /* main.swift */,
 				EC436CF2298132A10076CD4C /* Tests.swift */,
 			);
@@ -136,6 +139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC1AA1CA298961B800565AE4 /* Displayer.swift in Sources */,
 				EC7B1AF72976871C004177A5 /* main.swift in Sources */,
 				EC436CF3298132A10076CD4C /* Tests.swift in Sources */,
 			);

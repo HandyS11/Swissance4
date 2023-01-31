@@ -14,7 +14,7 @@ public class Player : CustomStringConvertible {
         self.name = name
     }
     
-    public func play(Board board: [[Int?]]) -> Int? {
+    public func play(Board board: [[Int?]]) -> Int {
         Int.random(in: 1...board[0].count)
     }
 }

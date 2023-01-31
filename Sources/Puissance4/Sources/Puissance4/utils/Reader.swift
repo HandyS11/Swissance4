@@ -3,14 +3,12 @@ import Foundation
 public struct Reader {
     
     public static func getInt() -> Int {
-        do {
-            //let choice = try Int(readLine(strippingNewline: true) ?? "42") ?? -1
-            //return choice
-            return 0
-        }
-        catch {
+        print("Please choose a column : ")
+        let choice = Int(readLine()!)
+        while(choice != nil) {
             print("You should enter an integer!\n")
             return getInt()
         }
+        return choice!;
     }
 }
