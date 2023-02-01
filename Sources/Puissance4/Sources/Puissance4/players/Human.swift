@@ -1,11 +1,19 @@
 import Foundation
 
 public class Human : Player {
+    
+    let scanner: Scanner
 
+    init(Id id: Int, Name name: String, Scanner scanner: Scanner) {
+        self.scanner = scanner
+        super.init(Id: id, Name: name)
+    }
+    
     override public func play(Board board: [[Int?]]) -> Int {
-        var choice: Int = Reader.getInt()
+        var choice: Int = scanner.getInt()
         while choice < 1 || choice > board[0].count {
-            choice = Reader.getInt()
+            print("Your choice is impossible, please choose a valid column!")
+            choice = scanner.getInt()
         }
         return choice
     }

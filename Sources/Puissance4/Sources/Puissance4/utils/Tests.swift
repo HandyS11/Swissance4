@@ -1,5 +1,4 @@
 import Foundation
-import Puissance4
 
 /// Construct a Nounours
 ///
