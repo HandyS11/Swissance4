@@ -2,7 +2,7 @@ import Foundation
 
 public struct Displayer {
     
-    private func gameName(Columns columns: Int = 7) -> String {
+    private static func gameName(Columns columns: Int = 7) -> String {
         var str: String = "\n"
         
         for _ in 1 ... columns-3 {
@@ -12,7 +12,7 @@ public struct Displayer {
         return str
     }
     
-    private func addDecoration(Columns columns: Int) -> String {
+    private static func addDecoration(Columns columns: Int) -> String {
         var s: String = String()
         for _ in 1 ... columns {
             s.append("\u{2015}\u{2015}\u{2015}\u{2015}")
@@ -21,9 +21,11 @@ public struct Displayer {
         return s
     }
     
-    public func buildGrid(Grille grid: String, Columns nbColumns: Int, ShowColumn b: Bool = true) -> String {
-        var str: String = addDecoration(Columns: nbColumns)
+    public static func buildGrid(Grille grid: String, Columns nbColumns: Int, ShowColumn b: Bool = true) -> String {
+        var str: String = gameName(Columns: nbColumns)
+        str.append(addDecoration(Columns: nbColumns))
         str += grid
+        str.append(addDecoration(Columns: nbColumns))
         
         if b {
             str.append("│")

@@ -5,4 +5,5 @@ public protocol LegacyRules : Rules {
     func ckeckVictory(Entry entry: [Int?]) -> Status
     func checkRowsAndColumns() -> Status
     func checkDiagonals() -> Status
+    func checkThreeDirections() -> Status
 }

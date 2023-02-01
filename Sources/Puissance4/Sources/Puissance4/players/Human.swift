@@ -9,9 +9,9 @@ public class Human : Player {
         super.init(Id: id, Name: name)
     }
     
-    override public func play(Board board: [[Int?]]) -> Int {
+    override public func play(Board board: Board) -> Int {
         var choice: Int = scanner.getInt()
-        while choice < 1 || choice > board[0].count {
+        while choice < 1 || choice > board.board[0].count {
             print("Your choice is impossible, please choose a valid column!")
             choice = scanner.getInt()
         }

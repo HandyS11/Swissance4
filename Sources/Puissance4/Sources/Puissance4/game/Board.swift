@@ -1,5 +1,9 @@
 import Foundation
 
+/// Board class
+///
+/// #Notes
+/// This class contains the grid of the game and all the methods working with it
 public struct Board : LegacyRules, CustomStringConvertible {
     
     public private(set) var nbColumns: Int
@@ -22,6 +26,18 @@ public struct Board : LegacyRules, CustomStringConvertible {
         return str
     }
 
+    /// Board constructor
+    ///
+    ///  Board constructor with
+    ///  - Parameter Rows: Number of rowss
+    ///  - Parameter Columns: Number of columns
+    ///  - Parameter PiecesToAlign: Number of piece to align to win the game
+    ///
+    ///  # Notes
+    ///   Check if the number of row is superior or equal to 6
+    ///   Check if the number of column is superior or equal to 7
+    ///   Check if the number of piece to align to win is superior or equal to 4
+    ///   It also check if the number of piece to align is coherent
     public init?(Rows rows: Int = 6, Columns columns: Int = 7, PiecesToAlign nbPieces: Int = 4) {
         guard rows >= 4 && columns >= 4 else { return nil }
         guard nbPieces <= rows && nbPieces <= columns else { return nil }
@@ -32,6 +48,16 @@ public struct Board : LegacyRules, CustomStringConvertible {
         board = Array(repeating: Array(repeating: nil, count: columns), count: rows)
     }
     
+    /// Board constructor
+    ///
+    ///  Board constructor with
+    ///  - Parameter Grid: Grid of the game
+    ///  - Parameter PiecesToAlign: Number of piece to align to win the game
+    ///
+    ///  # Notes
+    ///   Check if the grid dimensions are coherent
+    ///   Check if the number of piece to align to win is superior or equal to 4
+    ///   It also check if the number of piece to align is coherent
     public init?(Grid grid: [[Int?]], PiecesToAlign nbPieces: Int = 4) {
         guard grid.count >= 4 && grid[0].count >= 4 else { return nil}
         guard nbPieces <= grid.count && nbPieces <= grid[0].count else { return nil }
@@ -57,7 +83,7 @@ public struct Board : LegacyRules, CustomStringConvertible {
         return false
     }
     
-    private func isColumnFull(Column column: Int) -> Bool {
+    public func isColumnFull(Column column: Int) -> Bool {
         return board[nbRows-1][column] != nil
     }
     
@@ -94,14 +120,14 @@ public struct Board : LegacyRules, CustomStringConvertible {
     }
     
     public func checkRowsAndColumns() -> Status {
-        // columns
-        for i in 0 ..< nbColumns {
+        // rows
+        for i in 0 ..< nbRows {
             var r = ckeckVictory(Entry: board[i])
             if r != Status.CONTINUE {
                 return r;
             }
             
-            // rows
+            // column
             var tab: [Int?] = []
             for j in 0 ..< nbRows {
                 tab.append(board[i][j])
@@ -116,6 +142,14 @@ public struct Board : LegacyRules, CustomStringConvertible {
     
     public func checkDiagonals() -> Status {
         Status.CONTINUE
+    }
+    
+    public func checkThreeDirections() -> Status {
+        let r = checkRowsAndColumns()
+        if r == Status.CONTINUE {
+            return checkDiagonals()
+        }
+        return r
     }
     
     public func ckeckVictory(Entry entry: [Int?]) -> Status {
