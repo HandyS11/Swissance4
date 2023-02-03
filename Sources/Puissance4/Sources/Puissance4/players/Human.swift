@@ -12,7 +12,7 @@ public class Human : Player {
     override public func play(Board board: Board) -> Int {
         var choice: Int = scanner.getInt()
         while choice < 1 || choice > board.board[0].count {
-            print("Your choice is impossible, please choose a valid column!")
+            print("Your play is impossible, please choose a valid column!")
             choice = scanner.getInt()
         }
         return choice

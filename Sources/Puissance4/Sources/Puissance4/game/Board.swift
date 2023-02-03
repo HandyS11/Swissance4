@@ -83,6 +83,7 @@ public struct Board : LegacyRules, CustomStringConvertible {
         return false
     }
     
+    /// I decided to only check the top element of the grid for optimisation since it shall not be possible to get a non-contigus column with the basics rules.
     public func isColumnFull(Column column: Int) -> Bool {
         return board[nbRows-1][column] != nil
     }
@@ -98,7 +99,7 @@ public struct Board : LegacyRules, CustomStringConvertible {
     
     public mutating func putPiece(Column column: Int, Player p: Int) -> Bool {
         guard column > 0 && column <= nbColumns else { return false }
-        guard !isColumnFull(Column: column) else { return false }
+        guard !isColumnFull(Column: column-1) else { return false }
         for i in 0 ..< nbRows {
             if board[i][column-1] == nil {
                 board[i][column-1] = p
@@ -120,19 +121,34 @@ public struct Board : LegacyRules, CustomStringConvertible {
     }
     
     public func checkRowsAndColumns() -> Status {
-        // rows
+        let resultR = checkRows()
+        if resultR != Status.CONTINUE {
+            return resultR
+        }
+        let resultC = checkColumns()
+        if resultC != Status.CONTINUE {
+            return resultC
+        }
+        return Status.CONTINUE
+    }
+    
+    public func checkRows() -> Status {
         for i in 0 ..< nbRows {
-            var r = ckeckVictory(Entry: board[i])
+            let r = ckeckVictory(Entry: board[i])
             if r != Status.CONTINUE {
                 return r;
             }
-            
-            // column
+        }
+        return Status.CONTINUE
+    }
+    
+    public func checkColumns() -> Status {
+        for i in 0 ..< nbColumns {
             var tab: [Int?] = []
             for j in 0 ..< nbRows {
-                tab.append(board[i][j])
+                tab.append(board[j][i])
             }
-            r = ckeckVictory(Entry: tab)
+            let r = ckeckVictory(Entry: tab)
             if r != Status.CONTINUE {
                 return r;
             }
@@ -156,25 +172,19 @@ public struct Board : LegacyRules, CustomStringConvertible {
         if entry.count < nbPiecesToAlign {
             return Status.CONTINUE
         }
-        var strick = 1
-        var lastCarac = -1
+        var strick = 0
+        var lastCarac: Int? = entry[0]
         for i in 0 ..< entry.count {
-            let c = entry[i]
-            if c != nil {
-                if c == lastCarac {
-                    strick += 1
-                }
-                else {
-                    lastCarac = c!
-                }
+            let newCarac = entry[i]
+            if newCarac == lastCarac && lastCarac != nil {
+                strick += 1
             }
             else {
-                strick = 0
-                lastCarac = -1
+                strick = 1
+                lastCarac = newCarac
             }
-            
             if strick >= nbPiecesToAlign {
-                return Status.ENDED(REASON.PLAYER_ID(lastCarac))
+                return Status.ENDED(REASON.PLAYER_ID(lastCarac!))
             }
         }
         return Status.CONTINUE

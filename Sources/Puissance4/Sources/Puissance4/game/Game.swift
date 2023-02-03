@@ -44,6 +44,6 @@ public class Game {
             }
         }
         nbRound += 1
-        return board.checkRowsAndColumns()
+        return board.checkThreeDirections()
     }
 }

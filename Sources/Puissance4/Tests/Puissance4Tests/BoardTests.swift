@@ -116,4 +116,22 @@ final class BoardTests: XCTestCase {
         expect(Grid: grid1bis, Column: 3, ShouldPass: false)
         expect(Grid: grid1bis, Column: 6, ShouldPass: true)
     }
+    
+    func testBoardCheckVictory() throws {
+        func expect(Rows r: Int, Columns c: Int, PiecesToAlign nb: Int, Tab tab: [Int?], Result result: Status) {
+            let board: Board? = Board(Rows: r, Columns: c, PiecesToAlign: nb)
+            XCTAssertNotNil(board)
+            XCTAssertEqual(board!.ckeckVictory(Entry: tab), result)
+        }
+        expect(Rows: 6, Columns: 7, PiecesToAlign: 4, Tab: [nil, nil, nil, nil, nil, nil, nil], Result: Status.CONTINUE)
+        expect(Rows: 6, Columns: 7, PiecesToAlign: 4, Tab: [1, 2, 1, 2, 2, 2, 1], Result: Status.CONTINUE)
+        expect(Rows: 6, Columns: 7, PiecesToAlign: 4, Tab: [1, 1, 1, nil, 1, nil, nil], Result: Status.CONTINUE)
+        expect(Rows: 6, Columns: 7, PiecesToAlign: 4, Tab: [1, 1, 1, 1, 2, nil, nil], Result: Status.ENDED(REASON.PLAYER_ID(1)))
+        expect(Rows: 6, Columns: 7, PiecesToAlign: 4, Tab: [nil, 2, 2, 2, 2, nil, nil], Result: Status.ENDED(REASON.PLAYER_ID(2)))
+        expect(Rows: 6, Columns: 7, PiecesToAlign: 4, Tab: [nil, 2, 1, 2, 2, 2, 2], Result: Status.ENDED(REASON.PLAYER_ID(2)))
+        expect(Rows: 6, Columns: 7, PiecesToAlign: 4, Tab: [1, 1, 1, 2, 1, 2, 2], Result: Status.CONTINUE)
+        
+        expect(Rows: 6, Columns: 7, PiecesToAlign: 5, Tab: [nil, 2, 2, 2, 2, 2, nil], Result: Status.ENDED(REASON.PLAYER_ID(2)))
+        expect(Rows: 6, Columns: 7, PiecesToAlign: 5, Tab: [1, 1, 1, 2, 2, 2, 2], Result: Status.CONTINUE)
+    }
 }
