@@ -11,7 +11,7 @@ public struct Board : LegacyRules, CustomStringConvertible {
     public private(set) var nbPiecesToAlign: Int
     public let maxRound: Int
     public private(set) var board: [[Int?]]
-    private static let descriptionMapper : [Int? : String] = [nil: "  │ ", 1: "X │ ", 2: "O │ "]
+    private static let descriptionMapper : [Int? : String] = [nil: "  │ ", 1: "X │ ", 2: "O │ ", 3: "8 │ "]
     
     public var description: String {
         var str: String = String()

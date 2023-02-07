@@ -2,21 +2,14 @@ import Foundation
 
 public class Game {
 
-    let player1: Player
-    let player2: Player
+    var players: [Player] = []
     var nbRound: Int = 1
     var board: Board
     
     public init() {
-        player1 = Human(Id: 1, Name: "Human", Scanner: Reader())
-        player2 = AI(Id: 2, Name: "AI")
+        players.append(Human(Id: 1, Name: "Human", Scanner: Reader()))
+        players.append(AI(Id: 2, Name: "AI"))
         board = Board()!
-    }
-    
-    public init(player1: Player, player2: AI, board: Board) {
-        self.player1 = player1
-        self.player2 = player2
-        self.board = board
     }
     
     public func playGame() {
@@ -31,16 +24,11 @@ public class Game {
     }
     
     private func doRound() -> Status {
-        if nbRound%2 != 0 {
-            var result = board.putPiece(Column: player1.play(Board: board), Player: 1)
+        
+        for player in players {
+            var result = board.putPiece(Column: player.play(Board: board), Player: player.id)
             while !result {
-                result = board.putPiece(Column: player1.play(Board: board), Player: 1)
-            }
-        }
-        else {
-            var result = board.putPiece(Column: player2.play(Board: board), Player: 2)
-            while !result {
-                result = board.putPiece(Column: player2.play(Board: board), Player: 2)
+                result = board.putPiece(Column: player.play(Board: board), Player: player.id)
             }
         }
         nbRound += 1
