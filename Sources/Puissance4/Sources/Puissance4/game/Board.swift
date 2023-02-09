@@ -4,7 +4,7 @@ import Foundation
 ///
 /// #Notes
 /// This class contains the grid of the game and all the methods working with it
-public struct Board : Params, CustomStringConvertible {
+public struct Board : GridParams, CustomStringConvertible {
     
     public private(set) var nbColumns: Int
     public private(set) var nbRows: Int
@@ -12,6 +12,7 @@ public struct Board : Params, CustomStringConvertible {
     public let maxRound: Int
     public private(set) var board: [[Int?]]
     
+    // Kind of useless
     public var description: String {
         var str: String = String()
         
@@ -92,7 +93,7 @@ public struct Board : Params, CustomStringConvertible {
         return board[nbRows-1][column] != nil
     }
     
-    private mutating func setPiece(Row row: Int, Column column: Int, Player p: Int) -> Bool {
+    public mutating func setPiece(Row row: Int, Column column: Int, Player p: Int) -> Bool {
         guard (1...nbRows).contains(row) && (1...nbColumns).contains(column) else { return false }
         if board[row-1][column-1] == nil {
             board[row-1][column-1] = p
@@ -109,7 +110,7 @@ public struct Board : Params, CustomStringConvertible {
                 board[i][column-1] = p
                 return true
             }
-        }
+        }   // Shall not be possible
         return false
     }
 }

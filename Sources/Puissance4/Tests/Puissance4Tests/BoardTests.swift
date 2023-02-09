@@ -116,4 +116,25 @@ final class BoardTests: XCTestCase {
         expect(Grid: grid1bis, Column: 3, ShouldPass: false)
         expect(Grid: grid1bis, Column: 6, ShouldPass: true)
     }
+    
+    func testBoardSetPiece() throws {
+        func expect(Grid grid: [[Int?]], Row row: Int, Column column: Int, ShallPass b: Bool) {
+            var board: Board? = Board(Grid: grid)
+            XCTAssertNotNil(board)
+            XCTAssertEqual(board!.setPiece(Row: row, Column: column, Player: 1), b)
+        }
+        expect(Grid: grid1, Row: 1, Column: 1, ShallPass: true)
+        expect(Grid: grid1, Row: 0, Column: 1, ShallPass: false)
+        expect(Grid: grid1, Row: 1, Column: 0, ShallPass: false)
+        expect(Grid: grid1, Row: 7, Column: 1, ShallPass: false)
+        expect(Grid: grid1, Row: 1, Column: 8, ShallPass: false)
+        expect(Grid: grid1, Row: 6, Column: 7, ShallPass: true)
+        expect(Grid: grid1, Row: 3, Column: 4, ShallPass: true)
+        
+        expect(Grid: grid3, Row: 1, Column: 1, ShallPass: false)
+        expect(Grid: grid3, Row: 3, Column: 6, ShallPass: false)
+        expect(Grid: grid3, Row: 4, Column: 2, ShallPass: false)
+        expect(Grid: grid3, Row: 6, Column: 7, ShallPass: false)
+        expect(Grid: grid3, Row: 6, Column: 5, ShallPass: true)
+    }
 }

@@ -8,7 +8,7 @@ public class Player : CustomStringConvertible {
     
     public let id: Int
     public let name: String
-    public let carac: String
+    public let carac: String    // Not used yet
     
     public init(Id id: Int, Name name: String, Carac carac: String) {
         self.id = id

@@ -1,5 +1,5 @@
 import Foundation
 
-public protocol LegacyRule {
+protocol LegacyRule {
     func getStatusGame(Grid grid: [[Int?]], PiecesToAlign nbPieces: Int) -> Status
 }

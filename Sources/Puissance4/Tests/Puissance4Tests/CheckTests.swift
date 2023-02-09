@@ -18,5 +18,7 @@ final class CheckVictoryTests: XCTestCase {
         
         expect(PiecesToAlign: 5, Tab: [nil, 2, 2, 2, 2, 2, nil], Result: Status.ENDED(REASON.PLAYER_ID(2)))
         expect(PiecesToAlign: 5, Tab: [1, 1, 1, 2, 2, 2, 2], Result: Status.CONTINUE)
+        
+        expect(PiecesToAlign: 4, Tab: [nil, nil], Result: Status.CONTINUE)
     }
 }

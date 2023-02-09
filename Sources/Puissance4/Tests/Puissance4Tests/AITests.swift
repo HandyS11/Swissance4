@@ -36,11 +36,6 @@ final class AITests: XCTestCase {
                 [2, nil, 2, 1, nil, 1, nil]
                 ]
     
-    func testsAIDefault() throws {
-        let ai = AI(Id: 1, Name: "name")
-        XCTAssertNotNil(ai)
-    }
-    
     func testsPlayWithBoard() throws {
         func expect(Grid grid: [[Int?]], Plays plays: [Int?]) {
             let ai = AI(Id: 1, Name: "name")
