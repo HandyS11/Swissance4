@@ -2,6 +2,8 @@ import Foundation
 
 public class CheckVictory {
     
+    public init() {}
+    
     public func ckeckVictory(Entry entry: [Int?], PiecesToAlign nb: Int) -> Status {
         if entry.count < nb {
             return Status.CONTINUE

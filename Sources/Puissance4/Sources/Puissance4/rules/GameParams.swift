@@ -5,4 +5,6 @@ protocol GameParams {
     var board: Board { get }
     var displayer: Displayer { get }
     var rules: [LegacyRule] { get }
+    
+    func playGame()
 }

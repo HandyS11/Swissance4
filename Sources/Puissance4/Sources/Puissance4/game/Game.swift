@@ -2,36 +2,43 @@ import Foundation
 
 public class Game : GameParams {
 
-    var players: [Player] = []
     var nbRound: Int = 0
+    var players: [Player]
     var board: Board
     var displayer: Displayer
     var rules: [LegacyRule]
     
-    public init() {
-        players.append(Human(Id: 1, Name: "Human", Scanner: Reader()))
-        players.append(AI(Id: 2, Name: "AI"))
-        board = Board()!
-        displayer = Displayer()
-        rules = [CheckRows(), CheckColumns(), CheckDiagonals()]
+    public init?(NumberRows nbR: Int = 6, NumberColumns nbC: Int = 7, NumberPieceToAlign nbP: Int = 4, Players players: [Player], Rules rules: [LegacyRule], Displayer disp: Displayer) throws {
+        guard nbR >= 4 && nbC >= 4 else { return nil }
+        guard nbP <= nbR && nbP <= nbC else { return nil }
+        guard players.count >= 2 else { return nil }
+        guard rules.count >= 1 else { return nil }
+        
+        let board = Board(Rows: nbR, Columns: nbC, PiecesToAlign: nbP)
+        guard board != nil else { return nil }
+        
+        self.players = players
+        self.displayer = disp
+        self.rules = rules
+        self.board = board!
     }
     
     public func playGame() {
-        print(displayer.buildEnhanceGrid(Grid: board.board.reversed(), Columns: board.nbColumns))
         var r = doRound()
         while r == Status.CONTINUE {
-            print(displayer.buildEnhanceGrid(Grid: board.board.reversed(), Columns: board.nbColumns))
             r = doRound()
         }
-        print(displayer.buildEnhanceGrid(Grid: board.board.reversed(), Columns: board.nbColumns))
+        
+        displayer.finalRound()
+        displayer.buildEnhanceGrid(Grid: board.board.reversed(), Columns: board.nbColumns, ShowColumn: true)
         
         if (r == Status.ENDED(REASON.DEAD_END)) {
-            print("Dead end game! Maybe rematch?")
+            displayer.deadEnd()
         }
         else {
             // TODO: Find how to return the name od the player designated by his id in an array
-            //print(displayer.getPlayerWinDisplay(Player: players.first(where: {})!))
-            print("Vitory of \(r) in \(nbRound) rounds!")
+            //displayer.playerWinDisplay(Player: players.first(where: {})!)
+            print("Vitory of \(r) in \(nbRound) rounds!")   //TMP
         }
     }
     
@@ -39,6 +46,7 @@ public class Game : GameParams {
         
         var status: Status = Status.CONTINUE
         for player in players {
+            displayer.buildEnhanceGrid(Grid: board.board.reversed(), Columns: board.nbColumns, ShowColumn: true)
             if nbRound >= board.maxRound {
                 return Status.ENDED(REASON.DEAD_END)
             }
@@ -46,8 +54,8 @@ public class Game : GameParams {
             while !result {
                 result = board.putPiece(Column: player.play(Board: board), Player: player.id)
             }
-            
             nbRound += 1
+            
             for rule in rules {
                 // I decided to check the whole grid each time in case of a special play or rule that said that pieces already placed can move, not because I'm tired of this ;)
                 status = rule.getStatusGame(Grid: board.board, PiecesToAlign: board.nbPiecesToAlign)
@@ -55,6 +63,7 @@ public class Game : GameParams {
                     return status
                 }
             }
+            displayer.displaRound(Round: nbRound+1)
         }
         return status
     }

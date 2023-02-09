@@ -1,5 +1,5 @@
 import Foundation
 
-protocol Scanner {
+public protocol Scanner {
     func getInt() -> Int
 }

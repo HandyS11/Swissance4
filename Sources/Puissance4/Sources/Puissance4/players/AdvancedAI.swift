@@ -1,5 +1,5 @@
 import Foundation
 
-public class AdvanceAI : AI {
+public class AdvancedAI : AI {
     // Maybe a day
 }

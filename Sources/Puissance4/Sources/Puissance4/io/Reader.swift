@@ -2,6 +2,8 @@ import Foundation
 
 public struct Reader : Scanner {
     
+    public init() {}
+    
     public func getInt() -> Int {
         print("Please choose a column : ")
         let choice = Int(readLine()!)

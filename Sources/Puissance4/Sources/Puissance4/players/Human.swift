@@ -4,7 +4,7 @@ public class Human : Player {
     
     let scanner: Scanner
 
-    init(Id id: Int, Name name: String, Scanner scanner: Scanner) {
+    public init(Id id: Int, Name name: String, Scanner scanner: Scanner) {
         self.scanner = scanner
         super.init(Id: id, Name: name)
     }
