@@ -4,14 +4,13 @@ import Foundation
 ///
 /// #Notes
 /// This class contains the grid of the game and all the methods working with it
-public struct Board : LegacyRules, CustomStringConvertible {
+public struct Board : Params, CustomStringConvertible {
     
     public private(set) var nbColumns: Int
     public private(set) var nbRows: Int
     public private(set) var nbPiecesToAlign: Int
     public let maxRound: Int
     public private(set) var board: [[Int?]]
-    private static let descriptionMapper : [Int? : String] = [nil: "  │ ", 1: "X │ ", 2: "O │ ", 3: "8 │ "]
     
     public var description: String {
         var str: String = String()
@@ -19,7 +18,12 @@ public struct Board : LegacyRules, CustomStringConvertible {
         for row in board.reversed() {
             str.append("│ ")
             for cell in row {
-                str.append("\(String(describing: Board.descriptionMapper[cell] ?? "  \u{007C} "))")
+                if cell != nil {
+                    str.append("\(cell!) \u{007C} ")
+                }
+                else {
+                    str.append("  \u{007C} ")
+                }
             }
             str.append("\n")
         }
@@ -107,86 +111,5 @@ public struct Board : LegacyRules, CustomStringConvertible {
             }
         }
         return false
-    }
-    
-    public func isGameOver() -> Status {
-        let reason = checkRowsAndColumns()
-        if reason != Status.CONTINUE {
-            return reason
-        }
-        if isBoardFull() {
-            return Status.ENDED(REASON.DEAD_END)
-        }
-        return checkDiagonals()
-    }
-    
-    public func checkRowsAndColumns() -> Status {
-        let resultR = checkRows()
-        if resultR != Status.CONTINUE {
-            return resultR
-        }
-        let resultC = checkColumns()
-        if resultC != Status.CONTINUE {
-            return resultC
-        }
-        return Status.CONTINUE
-    }
-    
-    public func checkRows() -> Status {
-        for i in 0 ..< nbRows {
-            let r = ckeckVictory(Entry: board[i])
-            if r != Status.CONTINUE {
-                return r;
-            }
-        }
-        return Status.CONTINUE
-    }
-    
-    public func checkColumns() -> Status {
-        for i in 0 ..< nbColumns {
-            var tab: [Int?] = []
-            for j in 0 ..< nbRows {
-                tab.append(board[j][i])
-            }
-            let r = ckeckVictory(Entry: tab)
-            if r != Status.CONTINUE {
-                return r;
-            }
-        }
-        return Status.CONTINUE
-    }
-    
-    public func checkDiagonals() -> Status {
-        Status.CONTINUE
-    }
-    
-    public func checkThreeDirections() -> Status {
-        let r = checkRowsAndColumns()
-        if r == Status.CONTINUE {
-            return checkDiagonals()
-        }
-        return r
-    }
-    
-    public func ckeckVictory(Entry entry: [Int?]) -> Status {
-        if entry.count < nbPiecesToAlign {
-            return Status.CONTINUE
-        }
-        var strick = 0
-        var lastCarac: Int? = entry[0]
-        for i in 0 ..< entry.count {
-            let newCarac = entry[i]
-            if newCarac == lastCarac && lastCarac != nil {
-                strick += 1
-            }
-            else {
-                strick = 1
-                lastCarac = newCarac
-            }
-            if strick >= nbPiecesToAlign {
-                return Status.ENDED(REASON.PLAYER_ID(lastCarac!))
-            }
-        }
-        return Status.CONTINUE
     }
 }

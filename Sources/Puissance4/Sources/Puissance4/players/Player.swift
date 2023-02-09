@@ -3,14 +3,22 @@ import Foundation
 public class Player : CustomStringConvertible {
     
     public var description: String {
-        return String(format: "Player n°%d : %s", id, name)
+        "\(carac) - \(name)"
     }
     
     public let id: Int
     public let name: String
+    public let carac: String
+    
+    public init(Id id: Int, Name name: String, Carac carac: String) {
+        self.id = id
+        self.carac = carac
+        self.name = name
+    }
     
     public init(Id id: Int, Name name: String) {
         self.id = id
+        self.carac = String(id)
         self.name = name
     }
     
