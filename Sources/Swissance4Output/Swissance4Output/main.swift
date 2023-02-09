@@ -21,23 +21,23 @@ while choice != 9 {
     switch choice {
     case 1:
         players = [Human(Id: 1, Name: "Player 1", Scanner: reader), Human(Id: 2, Name: "Player 2", Scanner: reader)]
-        try game = Game(NumberRows: nbR, NumberColumns: nbC, NumberPieceToAlign: nbP, Players: players, Rules: rules, Displayer: displayer)!
+        game = Game(NumberRows: nbR, NumberColumns: nbC, NumberPieceToAlign: nbP, Players: players, Rules: rules, Displayer: displayer)!
         game.playGame()
     case 2:
         players = [Human(Id: 1, Name: "Player 1", Scanner: Reader()), AI(Id: 2, Name: "AI 1")]
-        try game = Game(NumberRows: nbR, NumberColumns: nbC, NumberPieceToAlign: nbP, Players: players, Rules: rules, Displayer: displayer)!
+        game = Game(NumberRows: nbR, NumberColumns: nbC, NumberPieceToAlign: nbP, Players: players, Rules: rules, Displayer: displayer)!
         game.playGame()
     case 3:
         players = [AI(Id: 1, Name: "AI 1"), AI(Id: 2, Name: "AI 2")]
-        try game = Game(NumberRows: nbR, NumberColumns: nbC, NumberPieceToAlign: nbP, Players: players, Rules: rules, Displayer: displayer)!
+        game = Game(NumberRows: nbR, NumberColumns: nbC, NumberPieceToAlign: nbP, Players: players, Rules: rules, Displayer: displayer)!
         game.playGame()
     case 4:
         players = [AI(Id: 1, Name: "AI 1"), AdvancedAI(Id: 2, Name: "Advanced AI 1")]
-        try game = Game(NumberRows: nbR, NumberColumns: nbC, NumberPieceToAlign: nbP, Players: players, Rules: rules, Displayer: displayer)!
+        game = Game(NumberRows: nbR, NumberColumns: nbC, NumberPieceToAlign: nbP, Players: players, Rules: rules, Displayer: displayer)!
         game.playGame()
     case 5:
         players = [AdvancedAI(Id: 1, Name: "Advanced AI 1"), AdvancedAI(Id: 2, Name: "Advanced AI 2")]
-        try game = Game(NumberRows: nbR, NumberColumns: nbC, NumberPieceToAlign: nbP, Players: players, Rules: rules, Displayer: displayer)!
+        game = Game(NumberRows: nbR, NumberColumns: nbC, NumberPieceToAlign: nbP, Players: players, Rules: rules, Displayer: displayer)!
         game.playGame()
     case 6:
         multiplayer()
@@ -60,9 +60,10 @@ print("See you next time ;)")
 
 
 func printMenu() {
-    print("\n\n \u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}")
+    print("\n\n")
+    print(" ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――")
     print("│                                                                │")
-    print("│                      - Swissance 4 -                           │")
+    print("│                        - Swissance 4 -                         │")
     print("│                                                                │")
     print("│ 1) - Classique Mode        (Human vs Human)                    │")
     print("│ 2) - Beginner Mode         (Human vs Beginner IA)              │")
@@ -76,7 +77,7 @@ func printMenu() {
     print("│                                                                │")
     print("│ 9) - Leave the game                                            │")
     print("│                                                                │")
-    print(" \u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}\u{2015}")
+    print(" ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――")
 }
 
 func waitAndGo() {

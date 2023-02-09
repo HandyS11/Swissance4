@@ -8,14 +8,14 @@ public class Game : GameParams {
     var displayer: Displayer
     var rules: [LegacyRule]
     
-    public init?(NumberRows nbR: Int = 6, NumberColumns nbC: Int = 7, NumberPieceToAlign nbP: Int = 4, Players players: [Player], Rules rules: [LegacyRule], Displayer disp: Displayer) throws {
+    public init?(NumberRows nbR: Int = 6, NumberColumns nbC: Int = 7, NumberPieceToAlign nbP: Int = 4, Players players: [Player], Rules rules: [LegacyRule], Displayer disp: Displayer) {
         guard nbR >= 4 && nbC >= 4 else { return nil }
         guard nbP <= nbR && nbP <= nbC else { return nil }
         guard players.count >= 2 else { return nil }
         guard rules.count >= 1 else { return nil }
         
         let board = Board(Rows: nbR, Columns: nbC, PiecesToAlign: nbP)
-        guard board != nil else { return nil }
+        guard board != nil else { return nil }  // Should never happend
         
         self.players = players
         self.displayer = disp

@@ -20,9 +20,9 @@ public struct CommandLineToolDisplayer : Displayer {
     private func addDecoration(Columns columns: Int) -> String {
         var s: String = String()
         for _ in 1 ... columns {
-            s.append("\u{2015}\u{2015}\u{2015}\u{2015}")
+            s.append("――――")
         }
-        s.append("\u{2015}\n")
+        s.append("―\n")
         return s
     }
     
@@ -48,7 +48,7 @@ public struct CommandLineToolDisplayer : Displayer {
         for row in grid {
             str.append("│ ")
             for cell in row {
-                str.append("\(String(describing: descriptionMapper[cell] ?? "  \u{007C} "))")
+                str.append("\(String(describing: descriptionMapper[cell] ?? "  │ "))")
             }
             str.append("\n")
         }
