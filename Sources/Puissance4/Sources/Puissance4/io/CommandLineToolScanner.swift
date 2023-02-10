@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Reader : Scanner {
+public struct CommandLineToolScanner : Scanner {
     
     public init() {}
     

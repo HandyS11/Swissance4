@@ -13,7 +13,7 @@ var nbC = 7
 var nbP = 4
 var rules: [LegacyRule] = [CheckRows(), CheckColumns(), CheckDiagonals()]
 var displayer = CommandLineToolDisplayer()
-var reader = Reader()
+var reader = CommandLineToolScanner()
 
 while choice != 9 {
     printMenu()
@@ -24,7 +24,7 @@ while choice != 9 {
         game = Game(NumberRows: nbR, NumberColumns: nbC, NumberPieceToAlign: nbP, Players: players, Rules: rules, Displayer: displayer)!
         game.playGame()
     case 2:
-        players = [Human(Id: 1, Name: "Player 1", Scanner: Reader()), AI(Id: 2, Name: "AI 1")]
+        players = [Human(Id: 1, Name: "Player 1", Scanner: reader), AI(Id: 2, Name: "AI 1")]
         game = Game(NumberRows: nbR, NumberColumns: nbC, NumberPieceToAlign: nbP, Players: players, Rules: rules, Displayer: displayer)!
         game.playGame()
     case 3:
@@ -41,16 +41,16 @@ while choice != 9 {
         game.playGame()
     case 6:
         multiplayer()
-        waitAndGo()
     case 7:
         editSettings()
-        waitAndGo()
     case 8:
         print("\nThanks for readin this ;)")
         print("")
         print("This project was fun to drive and I hope you like it!")
         print("Made with love <3\nHandyS11")
         waitAndGo()
+    case 9:
+        print("")
     default:
         print("Unknow option!")
     }
@@ -123,6 +123,8 @@ func editSettings() {
                 print("This entry ins't possible!")
                 nbP = getInt()
             }
+        case 4:
+            print("Feature not available yet")
         default:
             print("Unknow option!")
         }
@@ -130,9 +132,21 @@ func editSettings() {
 }
 
 func printSettingsMenu() {
-    
+    print("\n\n")
+    print(" ―――――――――――――――――――――――――――――――――――――")
+    print("│                                    │")
+    print("│           Settings Menu            │")
+    print("│                                    │")
+    print("│ 1) - Edit row number               │")
+    print("│ 2) - Edit column number            │")
+    print("│ 3) - Edit lengh to win             │")
+    print("│ 4) - Select rules                  │")
+    print("│                                    │")
+    print("│ 9) - Exit menu                     │")
+    print("│                                    │")
+    print(" ―――――――――――――――――――――――――――――――――――――")
 }
 
 func multiplayer() {
-    
+    print("Feature not available yet")
 }

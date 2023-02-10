@@ -42,8 +42,8 @@ final class AITests: XCTestCase {
             
             XCTAssertTrue(plays.contains(ai.play(Board: Board(Grid: grid)!)))
         }
-        expect(Grid: grid1, Plays: [ 0, 1, 2, 3, 4, 5, 6 ])
-        expect(Grid: grid2, Plays: [ 0, 1, 3, 4, 5, 6 ])
-        expect(Grid: grid3, Plays: [ 1, 4, 6])
+        expect(Grid: grid1, Plays: [ 1, 2, 3, 4, 5, 6, 7 ])
+        expect(Grid: grid2, Plays: [ 1, 2, 4, 5, 6, 7 ])
+        expect(Grid: grid3, Plays: [ 2, 5, 7])
     }
 }

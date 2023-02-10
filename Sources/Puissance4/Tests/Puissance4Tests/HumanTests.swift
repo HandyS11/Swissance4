@@ -4,8 +4,8 @@ import XCTest
 final class HumanTests: XCTestCase {
     
     func testsHumanDefault() throws {
-        let human1 = Human(Id: 1, Name: "name", Scanner: Reader())
-        let human2 = Human(Id: 1, Name: "name", Carac: "#", Scanner: Reader())
+        let human1 = Human(Id: 1, Name: "name", Scanner: CommandLineToolScanner())
+        let human2 = Human(Id: 1, Name: "name", Carac: "#", Scanner: CommandLineToolScanner())
         
         XCTAssertNotNil(human1)
         XCTAssertNotNil(human2)

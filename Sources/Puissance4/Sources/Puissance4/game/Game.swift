@@ -8,6 +8,15 @@ public class Game : GameParams {
     var displayer: Displayer
     var rules: [LegacyRule]
     
+    /// Game constructor
+    ///
+    ///  Game constructor with
+    ///  - Parameter nbR: Number of rowss
+    ///  - Parameter nbC: Number of columns
+    ///  - Parameter nbP: Number of piece to align to win the game
+    ///  - Parameter players: An array of Players
+    ///  - Parameter rules: An array of LegacyRule
+    ///  - Parameter disp: A displayer
     public init?(NumberRows nbR: Int = 6, NumberColumns nbC: Int = 7, NumberPieceToAlign nbP: Int = 4, Players players: [Player], Rules rules: [LegacyRule], Displayer disp: Displayer) {
         guard nbR >= 4 && nbC >= 4 else { return nil }
         guard nbP <= nbR && nbP <= nbC else { return nil }
@@ -23,6 +32,7 @@ public class Game : GameParams {
         self.board = board!
     }
     
+    // Main loop
     public func playGame() {
         var r = doRound()
         while r == Status.CONTINUE {
@@ -36,12 +46,13 @@ public class Game : GameParams {
             displayer.deadEnd()
         }
         else {
-            // TODO: Find how to return the name od the player designated by his id in an array
+            // TODO: Find how to return the name of the player designated by his id in an array
             //displayer.playerWinDisplay(Player: players.first(where: {})!)
             print("Vitory of \(r) in \(nbRound) rounds!")   //TMP
         }
     }
     
+    // Iteration for each player
     private func doRound() -> Status {
         
         var status: Status = Status.CONTINUE
