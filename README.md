@@ -9,6 +9,7 @@ A [Connect 4](https://www.google.com/search?q=Connect+4) build with [Swift](http
 
 As a project to learn the [swift](https://www.apple.com/fr/swift/) language, I code this [connect 4](https://www.google.com/search?q=Connect+4).
 This subject was given by my [swift](https://www.apple.com/fr/swift/) teacher with some specifications the following features filled.
+You can find the class diagram under the `./Documentation` folder.
 
 ## Features
 
